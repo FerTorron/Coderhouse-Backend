@@ -36,7 +36,7 @@ socketServer.on('connection', async socket => {
     socket.emit('productos', products);
 
     socket.on('addProduct', async (data) => {
-        const fer = await pManager.addProduct(data.title, data.description, data.price, data.status, data.category, data.thumbnail, data.code, data.stock);
+        await pManager.addProduct(data.title, data.description, data.price, data.status, data.category, data.thumbnail, data.code, data.stock);
         const updatedProducts = await pManager.getProducts();
         socketServer.emit('productosupdated', updatedProducts);
     });
