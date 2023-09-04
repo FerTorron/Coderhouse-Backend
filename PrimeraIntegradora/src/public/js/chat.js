@@ -39,7 +39,7 @@ formulario.onsubmit = (e) => {
 
 socketClient.on("chat", mensaje => {
     const chatrender = mensaje.map(e => {
-        return `<p><strong>${e.user}</strong>${e.message}`
+        return `<p><strong>${e.user}:</strong>${e.message}`
     }).join(" ")
     chat.innerHTML = chatrender
 })

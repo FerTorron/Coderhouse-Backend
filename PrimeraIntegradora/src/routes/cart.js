@@ -14,29 +14,27 @@ router.get("/", async (req, res) => {
 })
 
 router.get("/:cid", async (req, res) => {
-    const carritoFound = await cManager.getCartById(req.params);
+    const carritoFound = await cManager.getCartById(req.params.cid);
     res.json({ status: "success", carritoFound });
 });
 
 
 router.post('/', async (req, res) => {
     try {
-        const { obj } = req.body;
-        console.log(obj)
-        // if (!Array.isArray(obj)) {
-        //     return res.status(400).send('Invalid request: products must be an array');
-        // }
+        const obj = req.body;
+        if (!Array.isArray(obj)) {
+            return res.status(400).send('Invalid request: products must be an array');
+        }
 
         const validProducts = [];
 
         for (const product of obj) {
             const checkId = await pManager.getProductById(product._id);
-            if (checkId === null) {
+            if (checkId === `El producto con el ID: ${product._id} no fue encontrado`) {
                 return res.status(404).send(`Product with id ${product._id} not found`);
             }
-            validProducts.push(checkId);
+            validProducts.push({ _id: product._id, quantity: product.quantity });
         }
-
         const cart = await cManager.addCart(validProducts);
         res.status(200).send(cart);
 

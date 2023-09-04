@@ -1,7 +1,4 @@
 import { cartModel } from '../models/carts.js'
-// import ProductManager from '../mongomanagers/productManagerMongo.js'
-
-// const pManager = new ProductManager()
 
 export default class cartManager {
     getCarts = async () => {
@@ -24,10 +21,11 @@ export default class cartManager {
 
     addCart = async (products) => {
         try {
-            let cartData = []
+            let cartData = {}
             if (products && products.length > 0) {
-                cartData.products = products
+                cartData.products = products;
             }
+            console.log(cartData)
 
             const cart = await cartModel.create(cartData)
             return cart
