@@ -52,10 +52,10 @@ router.get('/products', async (req, res) => {
             hasPrevPage: products.hasPrevPage,
             hasNextPage: products.hasNextPage,
             prevLink: products.hasPrevPage
-                ? `/products?page=${products.prevPage}`
+                ? `http://localhost:8080/products?page=${products.prevPage}`
                 : null,
             nextLink: products.hasNextPage
-                ? `/products?page=${products.nextPage}`
+                ? `http://localhost:8080/products?page=${products.nextPage}`
                 : null
         }
 
@@ -78,6 +78,19 @@ router.get('/realtimeproducts', (req, res) => {
 
 router.get('/chat', (req, res) => {
     res.render("chat")
+})
+
+//SESSION
+router.get('/login', (req, res) => {
+    // res.render('login')
+})
+
+router.get('/register', (req, res) => {
+    // res.render('register')
+})
+
+router.get('/profile', (req, res) => {
+    // res.render('profile')
 })
 
 export default router

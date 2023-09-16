@@ -1,0 +1,29 @@
+<h1>Lans Productos</h1>
+<div>
+  {{#if listProducts.length}}
+    <section class="productsContainer">
+      {{#each listProducts}}
+        <div class="productCard">
+          <h3>{{title}}</h3>
+          <h4>{{description}}</h4>
+          <h4>${{price}}</h4>
+          <img src={{thumbnail}} />
+          <button id="{{id}}" class="addButton">Agregar al Carrito</button>
+        </div>
+      {{/each}}
+    </section>
+  {{else}}
+    <h3>Error cargando los productos</h3>
+  {{/if}}
+  <br />
+  <br />
+  {{#if hasPrevPage}}
+    <a href={{prevLink}}><button>Anterior</button></a>
+  {{/if}}
+
+  {{#if hasNextPage}}
+    <a href={{nextLink}}><button>Siguiente</button></a>
+  {{/if}}
+</div>
+
+<script src="/js/carrito.js"></script>
