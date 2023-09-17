@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+/* -- SCROLLBAR -- */
+::-webkit-scrollbar {
+  background: #ebe7d9;
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0f222d;
+}
+.mainContainer {
+  margin-top: 80px;
+}
+/* NAVBAR */
+header {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 50px;
+  position: fixed;
+  background: transparent;
+  top: 0;
+  right: 0;
+  z-index: 500;
+  transition: all 300ms;
+}
+header.scrollNav {
+  height: 70px;
+  /* border-bottom: 2px solid #ebe7d9; */
+  box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.062745098);
+  background-color: #0f222d;
+}
+header img {
+  width: 150px;
+  cursor: pointer;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+nav ul li {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #ebe7d9;
+  font-size: 1rem;
+  font-weight: 500;
+}
+nav ul li:not(.profileNav)::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  background: #ebe7d9;
+  width: 100%;
+  height: 0.1em;
+  bottom: 0;
+  left: 0;
+  transition: transform 0.25s ease;
+  transform: scaleX(0);
+  transform-origin: center;
+}
+nav ul li:not(.profileNav):hover::after {
+  transform: scaleX(1);
+  transform-origin: center;
+}
+.profileNav {
+  padding-left: 50px;
+}
+.profileNav a {
+  font-size: 1.5rem;
+}
+
+/* HOME */
+.homeContainer {
+  width: 100%;
+  height: 100vh;
+}
+.homeContainer .homeIntro {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(15, 34, 45, 0.6), rgba(15, 34, 45, 0.6)),
+    url("https://images.pexels.com/photos/7679660/pexels-photo-7679660.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+      no-repeat center center/cover;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.homeContainer .homeIntro h2 {
+  font-size: 5rem;
+  color: #ebe7d9;
+  font-family: "Cinzel", serif;
+  font-weight: 500;
+}
+.homeContainer .homeIntro p {
+  color: #ebe7d9;
+  font-family: "Cinzel", serif;
+  font-size: 2.5rem;
+}
+
+.homeContainer .menuPrueba {
+  padding: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
