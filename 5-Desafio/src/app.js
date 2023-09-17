@@ -1,8 +1,8 @@
 import express from 'express'
+import session from 'express-session'
 import handlebars from 'express-handlebars'
 import { Server } from 'socket.io'
 import MongoStore from 'connect-mongo'
-import session from 'express-session'
 
 import { __dirname } from './utils.js'
 import './dao/dbConfig.js'
@@ -17,17 +17,11 @@ import productsRouter from './routes/products.js'
 import cartRouter from './routes/cart.js'
 import viewRouter from './routes/view.js'
 import sessionRouter from './routes/sessions.js'
-import mongoose from 'mongoose'
 
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 const PORT = process.env.PORT || 8080;
-
-// const connection = mongoose.connect('mongodb+srv://CoderUser:asd123@cluster0.yb79iwi.mongodb.net/ecommerce', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// })
 
 app.use(session({
     store: MongoStore.create({
@@ -36,7 +30,7 @@ app.use(session({
     }),
     secret: 'CoderSecret',
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: false
 }))
 
 app.engine('handlebars', handlebars.engine())
@@ -48,8 +42,8 @@ app.use(express.static(__dirname + '/public'));
 
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartRouter)
-app.use('/', viewRouter)
 app.use('/api/sessions', sessionRouter)
+app.use('/', viewRouter)
 
 
 const server = app.listen(8080, () => {

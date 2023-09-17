@@ -1,0 +1,19 @@
+<div>
+  <h1>Registro</h1>
+  <form id="registerForm">
+    <input name="first_name" placeholder="Nombre" {{required}} />
+    <input name="last_name" placeholder="Apellido" {{required}} />
+    <input name="email" placeholder="Email" {{required}} />
+    <input name="age" placeholder="Edad" {{required}} />
+    <input
+      name="password"
+      type="password"
+      placeholder="Contraseña"
+      {{required}}
+    />
+    <input type="submit" value="Registrar" {{required}} />
+  </form>
+  <p>¿Ya tienes una Cuenta? <a href="/login">Login</a></p>
+</div>
+
+<script src="/js/register.js"></script>
