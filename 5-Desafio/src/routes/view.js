@@ -21,7 +21,7 @@ const adminAccess = (req, res, next) => {
     }
 }
 
-router.get('/', publicAccess, (req, res) => {
+router.get('/', privateAccess, (req, res) => {
     res.render("home", { title: "Lans - Home", isHomePage: true })
 })
 

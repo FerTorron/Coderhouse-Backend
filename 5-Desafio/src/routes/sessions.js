@@ -5,8 +5,20 @@ const router = Router();
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
+
+    if (email === 'adminCoder@coder.com' && password === 'adminCod3r123') {
+        req.session.user = {
+            name: 'Admin',
+            email: email,
+            role: 'admin'
+        };
+        return res.status(200).send({ status: "success", payload: req.session.user });
+    }
+
     const user = await userModel.findOne({ email, password });
-    if (!user) return res.status(400).send({ status: "error", error: "Usuario no existe" })
+    if (!user) {
+        return res.status(400).send({ status: "error", error: "Usuario no existe" });
+    }
 
     req.session.user = {
         name: `${user.first_name} ${user.last_name}`,
@@ -15,7 +27,7 @@ router.post('/login', async (req, res) => {
         role: user.role
     }
 
-    res.send({ status: "success", payload: req.session.user })
+    res.send({ status: "success", payload: req.session.user });
 })
 
 router.post('/register', async (req, res) => {

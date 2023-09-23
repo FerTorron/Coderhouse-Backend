@@ -1,4 +1,4 @@
-const form = document.getElementById('registerForm');
+const form = document.getElementById('accessForm');
 
 form.addEventListener('submit', e => {
     e.preventDefault();

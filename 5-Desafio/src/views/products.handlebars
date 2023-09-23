@@ -1,5 +1,7 @@
 <div class="mainContainer">
   <h1>Lans Productos</h1>
+  <h2>Bienvenido {{user.name}}</h2>
+  <p>Rol: {{user.role}}</p>
   <div>
     {{#if listProducts.length}}
       <section class="productsContainer">
@@ -29,8 +31,3 @@
 </div>
 
 <script src="/js/carrito.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  Swal.fire({ toast: true, position: "top-right", title: `Bienvenido
-  {{user.name}}`, timer: 2000, showConfirmButton: false, icon: "info" })
-</script>
