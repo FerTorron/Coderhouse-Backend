@@ -5,33 +5,6 @@ import passport from "passport";
 
 const router = Router();
 
-// router.post('/login', async (req, res) => {
-//     const { email, password } = req.body;
-
-//     if (email === 'adminCoder@coder.com' && password === 'adminCod3r123') {
-//         req.session.user = {
-//             name: 'Admin',
-//             email: email,
-//             role: 'admin'
-//         };
-//         return res.status(200).send({ status: "success", payload: req.session.user });
-//     }
-
-//     const user = await userModel.findOne({ email })
-//     if (!user) return res.status(401).send({ status: "error", error: "Email incorrecto" });
-
-//     if (!isValidPassword(user, password)) {
-//         return res.status(401).send({ status: 'error', error: 'Contraseña incorrecta' })
-//     }
-//     req.session.user = {
-//         name: `${user.first_name} ${user.last_name}`,
-//         email: user.email,
-//         age: user.age,
-//         role: user.role
-//     }
-//     res.send({ status: "success", payload: req.session.user })
-// })
-
 router.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), async (req, res) => {
 
     if (!req.user) return res.status(401).send({
