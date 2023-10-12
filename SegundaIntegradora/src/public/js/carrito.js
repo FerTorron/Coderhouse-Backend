@@ -18,8 +18,26 @@ const agregarProd = (idProduct) => {
         .then(response => {
             if (response.ok) {
                 console.log('Solicitud POST exitosa');
+
+                Swal.fire({
+                    toast: true,
+                    position: "top-right",
+                    title: `Producto agregado al carrito`,
+                    timer: 2000,
+                    showConfirmButton: false,
+                    icon: "info"
+                })
             } else {
                 console.error('Error en la solicitud POST');
+
+                Swal.fire({
+                    toast: true,
+                    position: "top-right",
+                    title: `Error al agregar el producto al carrito`,
+                    timer: 2000,
+                    showConfirmButton: false,
+                    icon: "error"
+                })
             }
         })
         .catch(error => {
