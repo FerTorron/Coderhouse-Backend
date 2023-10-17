@@ -52,6 +52,17 @@ router.get('/githubcallback', passport.authenticate('github', { failureRedirect:
     res.redirect('/products')
 })
 
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/googlecallback', passport.authenticate('google', { failureRedirect: '/login' }), async (req, res) => {
+    req.session.user = {
+        name: req.user.first_name,
+        email: req.user.email,
+        avatar: req.user.avatar,
+        role: req.user.role
+    }
+    res.redirect('/products');
+});
+
 router.post('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) {
@@ -70,5 +81,6 @@ router.get('/current', (req, res) => {
         res.send({ status: "error", error: "No hay usuario logueado" })
     }
 })
+
 
 export default router

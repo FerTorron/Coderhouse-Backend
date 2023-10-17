@@ -5,6 +5,7 @@ import { createHash, isValidPassword } from "../utils.js";
 import gitHubStrategy from "passport-github2";
 import mongoose from "mongoose";
 import config from "./config.js";
+import GoogleStrategy from "passport-google-oauth20";
 
 const LocalStrategy = local.Strategy;
 const GitHubStrategy = gitHubStrategy.Strategy;
@@ -72,6 +73,30 @@ export const initializePassport = () => {
             return done(error)
         }
     }))
+
+    passport.use('google', new GoogleStrategy({
+        clientID: config.googleClientId,
+        clientSecret: config.googleClientSecret,
+        callbackURL: 'http://localhost:8080/api/sessions/googlecallback'
+    }, async (accessToken, refreshToken, profile, done) => {
+        try {
+            let user = await userModel.findOne({ email: profile.emails[0].value });
+            if (!user) {
+                let newUser = {
+                    first_name: profile.displayName,
+                    email: profile.emails[0].value,
+                    avatar: profile.photos[0].value,
+                    role: "user",
+                    cart: new mongoose.Types.ObjectId()
+                }
+                let result = await userModel.create(newUser);
+                return done(null, result);
+            }
+            done(null, user);
+        } catch (error) {
+            return done(error);
+        }
+    }));
 
     passport.serializeUser((user, done) => {
         done(null, user._id)
