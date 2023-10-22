@@ -153,6 +153,7 @@ nav ul li:not(.profileNav):hover::after {
   gap: 30px;
 }
 .formContainer .accessForm {
+  margin: 70px 0 0 0;
   width: 550px;
   padding: 50px 20px;
   display: flex;

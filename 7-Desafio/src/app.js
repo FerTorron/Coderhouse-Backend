@@ -1,7 +1,6 @@
 import express from 'express'
 import session from 'express-session'
 import handlebars from 'express-handlebars'
-import { Server } from 'socket.io'
 import MongoStore from 'connect-mongo'
 
 import passport from 'passport'
@@ -16,6 +15,9 @@ const pManager = new ProductManager()
 
 import MessagesManager from './dao/managers/messageManagerMongo.js'
 const msgMaganer = new MessagesManager()
+
+import { Server } from 'socket.io'
+const socketServer = new Server(server)
 
 import productsRouter from './routes/products.js'
 import cartRouter from './routes/cart.js'
@@ -57,7 +59,6 @@ const server = app.listen(8080, () => {
     console.log(`Servidor Inicializado en el Puerto ${PORT}`)
 })
 
-const socketServer = new Server(server)
 socketServer.on('connection', async socket => {
     console.log("Cliente conectado con ID:", socket.id)
 
