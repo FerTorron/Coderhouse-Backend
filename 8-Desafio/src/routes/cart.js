@@ -6,6 +6,10 @@ import { ticketsModel } from "../dao/models/tickets.js"
 import { v4 as uuidv4 } from 'uuid';
 import { checkRole } from "../middlewares/auth.js"
 
+import CustomError from '../services/errors/CustomError.js'
+import EErrors from "../services/errors/enums.js"
+import { addCartErrorInfo, addProdInCartErrorInfo } from "../services/errors/info.js"
+
 const cManager = new CartManager()
 const pManager = new ProductManager()
 
@@ -25,6 +29,14 @@ router.get("/:cid", async (req, res) => {
 router.post('/', checkRole("user"), async (req, res) => {
     try {
         const obj = req.body;
+        if (!obj) {
+            CustomError.createError({
+                name: "Error al Crear el Carrito",
+                cause: addCartErrorInfo({ obj }),
+                message: "Se ha encontrado un error al crear el Carrito",
+                code: EErrors.INVALID_TYPES_ERROR
+            })
+        }
         if (!Array.isArray(obj)) {
             return res.status(400).send('Invalid request: products must be an array');
         }
@@ -52,6 +64,14 @@ router.post("/:cid/products/:pid", checkRole("user"), async (req, res) => {
     const { quantity } = req.body;
 
     try {
+        if (!cid || !pid || !quantity) {
+            CustomError.createError({
+                name: "Error al Agregar el Producto en el Carrito",
+                cause: addProdInCartErrorInfo({ cid, pid, quantity }),
+                message: "Se ha encontrado un agregar el Producto el Carrito",
+                code: EErrors.INVALID_TYPES_ERROR
+            })
+        }
         const checkIdProduct = await pManager.getProductById(pid);
         if (!checkIdProduct) {
             return res.status(404).send({ message: `Product with ID: ${pid} not found` });

@@ -1,3 +1,4 @@
+// SESSION
 export const registerUserErrorInfo = (user) => {
     return `
         Alguno de los campos para crear el usuario no es valido
@@ -19,6 +20,7 @@ export const loginUserErrorInfo = (user) => {
     `
 }
 
+// PRODUCT
 export const newProductErrorInfo = (product) => {
     return `
         Alguno de los campos para crear el producto no es valido
@@ -34,7 +36,7 @@ export const newProductErrorInfo = (product) => {
 
 export const deleteProductErrorInfo = (product) => {
     return `
-        Alguno de los campos para crear el producto no es valido
+        Alguno de los campos para eliminar el producto no es valido
         Lista de campos requeridos:
         ID: debe ser un campo de tipo String, pero se recibio ${product.idProduct},
     `
@@ -42,9 +44,28 @@ export const deleteProductErrorInfo = (product) => {
 
 export const editProductErrorInfo = (product) => {
     return `
-        Alguno de los campos para crear el producto no es valido
+        Alguno de los campos para editar el producto no es valido
         Lista de campos requeridos:
         ID: debe ser un campo de tipo String, pero se recibio ${product.idProduct},
         newData: debe ser un campo de tipo String, pero se recibio ${product.newData},
+    `
+}
+
+// CART
+export const addCartErrorInfo = (cart) => {
+    return `
+        Alguno de los campos para crear el carrito no es valido
+        Lista de campos requeridos:
+        Obj: debe ser un campo de tipo String, pero se recibio ${cart.obj},
+    `
+}
+
+export const addProdInCartErrorInfo = (cart) => {
+    return `
+        Alguno de los campos para crear el carrito no es valido
+        Lista de campos requeridos:
+        Cart ID: debe ser un campo de tipo String, pero se recibio ${cart.cid},
+        Prod ID: debe ser un campo de tipo String, pero se recibio ${cart.pid},
+        Cantidad: debe ser un campo de tipo String, pero se recibio ${cart.quantity},
     `
 }
