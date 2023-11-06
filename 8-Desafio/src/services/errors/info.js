@@ -31,3 +31,20 @@ export const newProductErrorInfo = (product) => {
         stock:debe ser un campo de tipo String, pero se recibio ${product.stock},
     `
 }
+
+export const deleteProductErrorInfo = (product) => {
+    return `
+        Alguno de los campos para crear el producto no es valido
+        Lista de campos requeridos:
+        ID: debe ser un campo de tipo String, pero se recibio ${product.idProduct},
+    `
+}
+
+export const editProductErrorInfo = (product) => {
+    return `
+        Alguno de los campos para crear el producto no es valido
+        Lista de campos requeridos:
+        ID: debe ser un campo de tipo String, pero se recibio ${product.idProduct},
+        newData: debe ser un campo de tipo String, pero se recibio ${product.newData},
+    `
+}
